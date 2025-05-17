@@ -1,11 +1,12 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const sections = [
-  { id: 'home', label: 'Home' },
-  { id: 'whoiam', label: 'Sobre mí' },
+  { id: 'home', label: 'Inicio' },
+  { id: 'about', label: 'Quién soy' },
+  { id: 'brand', label: 'Marca personal' },
   { id: 'projects', label: 'Proyectos' },
   { id: 'skills', label: 'Habilidades' },
   { id: 'contact', label: 'Contacto' },
@@ -15,40 +16,36 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState<string>('home');
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        let maxRatio = 0;
-        let visibleSectionId = activeSection;
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      let current = 'home';
 
-        entries.forEach((entry) => {
-          if (entry.intersectionRatio > maxRatio) {
-            maxRatio = entry.intersectionRatio;
-            visibleSectionId = entry.target.id;
+      for (let section of sections) {
+        const el = document.getElementById(section.id);
+        if (el) {
+          const offsetTop = el.offsetTop;
+          if (scrollY >= offsetTop - 200) {
+            current = section.id;
           }
-        });
-
-        if (visibleSectionId !== activeSection) {
-          setActiveSection(visibleSectionId);
         }
-      },
-      {
-        rootMargin: '0px 0px -70% 0px',
-        threshold: Array.from({ length: 101 }, (_, i) => i / 100),
       }
-    );
 
-    sections.forEach(({ id }) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
+      if (current !== activeSection) {
+        setActiveSection(current);
+      }
+    };
 
-    return () => observer.disconnect();
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Llamar al cargar
+
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [activeSection]);
 
   const handleScrollTo = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+      setActiveSection(id); // Marcar como activa al hacer clic
     }
   };
 
@@ -59,23 +56,19 @@ export default function Navbar() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1, ease: 'easeOut' }}
     >
-      <div className="pointer-events-auto bg-white/80 backdrop-blur-md shadow-xl shadow-gray-300/40 rounded-2xl px-6 py-3 max-w-3xl w-[90%] flex justify-center">
-        <ul className="flex flex-wrap gap-4 sm:gap-6 text-sm sm:text-base text-black font-semibold">
+      <div className="pointer-events-auto bg-white/80 backdrop-blur-md shadow-xl shadow-gray-300/40 rounded-2xl px-6 py-3 w-[95%] max-w-6xl flex justify-center">
+        <ul className="flex flex-wrap gap-4 sm:gap-6 text-sm sm:text-base text-black font-semibold justify-center">
           {sections.map(({ id, label }) => (
             <li key={id}>
               <motion.button
                 onClick={() => handleScrollTo(id)}
                 aria-label={`Ir a ${label}`}
-                aria-current={activeSection === id ? 'page' : undefined}
-                className="px-4 py-2 rounded-full focus:outline-none"
-                whileHover={{ scale: 1.1, boxShadow: '0 4px 15px rgba(72, 187, 120, 0.4)' }}
+                className={`px-4 py-2 rounded-full transition-all duration-300 focus:outline-none ${
+                  activeSection === id
+                    ? 'bg-[#56A6A6] text-white shadow-md'
+                    : 'bg-transparent text-black'
+                }`}
                 whileTap={{ scale: 0.95 }}
-                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                style={{
-                  backgroundColor: activeSection === id ? '#14B8A6' : 'transparent',
-                  color: activeSection === id ? 'white' : 'black',
-                  boxShadow: activeSection === id ? '0 4px 10px rgba(20, 184, 166, 0.5)' : 'none',
-                }}
               >
                 {label}
               </motion.button>
