@@ -1,7 +1,37 @@
 import { motion } from 'framer-motion';
+import { useRef, useState } from 'react';
+import emailjs from '@emailjs/browser';
 
-// src/components/Contact.tsx
 export default function Contact() {
+  const form = useRef<HTMLFormElement>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!form.current) return;
+
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      await emailjs.sendForm(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        form.current,
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+      );
+      
+      setSubmitStatus('success');
+      form.current.reset();
+    } catch (error) {
+      console.error('Error:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section id="contact" className="min-h-screen py-20 px-8 bg-white border-t-2 border-[#56A6A6]">
       <div className="max-w-4xl mx-auto mt-15">
@@ -32,6 +62,8 @@ export default function Contact() {
 
         {/* Formulario */}
         <motion.form
+          ref={form}
+          onSubmit={handleSubmit}
           className="max-w-2xl mx-auto space-y-6"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -43,6 +75,7 @@ export default function Contact() {
             <div>
               <input
                 type="text"
+                name="user_name" // Importante: debe coincidir con tu template
                 placeholder="Nombre"
                 className="w-full px-6 py-3 rounded-full border-2 border-[#56A6A6] focus:outline-none focus:border-[#458585] transition-colors"
                 style={{ fontFamily: 'Poppins, sans-serif' }}
@@ -54,6 +87,7 @@ export default function Contact() {
             <div>
               <input
                 type="email"
+                name="user_email" // Importante: debe coincidir con tu template
                 placeholder="Email"
                 className="w-full px-6 py-3 rounded-full border-2 border-[#56A6A6] focus:outline-none focus:border-[#458585] transition-colors"
                 style={{ fontFamily: 'Poppins, sans-serif' }}
@@ -64,6 +98,7 @@ export default function Contact() {
             {/* Mensaje */}
             <div>
               <textarea
+                name="message" // Importante: debe coincidir con tu template
                 placeholder="Mensaje"
                 rows={5}
                 className="w-full px-6 py-3 rounded-3xl border-2 border-[#56A6A6] focus:outline-none focus:border-[#458585] transition-colors resize-none"
@@ -76,13 +111,39 @@ export default function Contact() {
           {/* Botón enviar */}
           <motion.button
             type="submit"
-            className="w-full bg-[#56A6A6] text-white py-3 px-8 rounded-full hover:bg-[#458585] transition-colors"
+            disabled={isSubmitting}
+            className={`w-full py-3 px-8 rounded-full transition-colors ${
+              isSubmitting 
+                ? 'bg-gray-400 cursor-not-allowed' 
+                : 'bg-[#56A6A6] hover:bg-[#458585]'
+            } text-white`}
             style={{ fontFamily: 'Poppins, sans-serif' }}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+            whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+            whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
           >
-            Enviar mensaje
+            {isSubmitting ? 'Enviando...' : 'Enviar mensaje'}
           </motion.button>
+
+          {/* Mensajes de estado */}
+          {submitStatus === 'success' && (
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-green-600 text-center mt-4"
+            >
+              ¡Mensaje enviado con éxito!
+            </motion.p>
+          )}
+          
+          {submitStatus === 'error' && (
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-red-600 text-center mt-4"
+            >
+              Error al enviar el mensaje. Por favor, inténtalo de nuevo.
+            </motion.p>
+          )}
         </motion.form>
       </div>
     </section>

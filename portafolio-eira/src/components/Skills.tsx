@@ -5,17 +5,17 @@ import { motion } from 'framer-motion';
 const skills = [
 	{
 		name: 'Adobe Xd',
-		level: 40,
+		level: 25,
 		icon: '/skills/xd.svg',
 	},
 	{
 		name: 'Adobe Illustrator',
-		level: 85,
+		level: 75,
 		icon: '/skills/ai.svg',
 	},
 	{
 		name: 'Adobe Photoshop',
-		level: 95,
+		level: 70,
 		icon: '/skills/ps.svg',
 	},
 	{
@@ -25,12 +25,12 @@ const skills = [
 	},
 	{
 		name: 'Adobe Premiere',
-		level: 50,
+		level: 60,
 		icon: '/skills/pr.svg',
 	},
 	{
 		name: 'Figma',
-		level: 60,
+		level: 30,
 		icon: '/skills/figma.svg',
 	},
 ];
@@ -76,7 +76,7 @@ export default function Skills() {
 							</div>
 
 							{/* Barra de progreso */}
-							<div className="flex-1">
+							<div className="flex-1 relative"> {/* Quitamos el flex y gap-4 del contenedor padre */}
 								<motion.div
 									className="h-4 bg-[#56A6A6] rounded-full"
 									initial={{ width: 0 }}
@@ -84,6 +84,21 @@ export default function Skills() {
 									transition={{ duration: 1, delay: index * 0.1 }}
 									viewport={{ once: true }}
 								/>
+								<motion.span
+									className="absolute text-xl font-bold text-[#56A6A6]" // Aumentado tamaño y peso
+									style={{
+										left: `${skill.level}%`,
+										top: '50%',
+										transform: 'translateY(-50%)',
+										marginLeft: '8px' // Espaciado desde el final de la barra
+									}}
+									initial={{ opacity: 0 }}
+									whileInView={{ opacity: 1 }}
+									transition={{ duration: 0.5, delay: index * 0.1 + 1 }}
+									viewport={{ once: true }}
+								>
+									{skill.level}%
+								</motion.span>
 							</div>
 						</motion.div>
 					))}

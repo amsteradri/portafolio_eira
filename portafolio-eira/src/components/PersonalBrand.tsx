@@ -6,13 +6,13 @@ export default function PersonalBrand() {
   const firstRowTags = [
     "Cuervo: Influencia nórdica",
     "Minimalismo",
-    "Limpio, regular",
+    "Limpio",
   ];
 
   const secondRowTags = [
-    "Geométrico, preciso",
-    "Frío",
-    "Mítico, simbólico"
+    "Geométrico",
+    "Estetico",
+    "Mítico"
   ];
 
   return (
