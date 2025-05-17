@@ -5,6 +5,7 @@ import logo from '../../public/logo.svg';
 import patitas from '../../public/patitas.svg';
 import TextPressure from "@/blocks/TextAnimations/TextPressure/TextPressure";
 import { motion } from 'framer-motion';
+import FallingLeaves from '@/components/FallingLeaves';
 
 export default function Hero() {
   return (
@@ -12,6 +13,7 @@ export default function Hero() {
       id="home"
       className="min-h-[110vh] md:min-h-screen flex items-center justify-center px-6 bg-gradient-to-b from-white to-white relative -mt-24 md:mt-0" // Aumentado height en móvil y más margin top negativo
     >
+      <FallingLeaves />
       {/* Patitas SVG izquierda */}
       <motion.div
         className="absolute -left-18 md:left-[-4rem] top-[70%] md:top-110 w-[250px] md:w-[400px] h-[500px] md:h-[800px]" // Ajustado left para móvil
