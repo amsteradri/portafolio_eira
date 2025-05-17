@@ -10,7 +10,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="min-h-[110vh] md:min-h-screen flex items-center justify-center px-6 bg-gradient-to-b from-white to-gray-50 relative -mt-24 md:mt-0" // Aumentado height en móvil y más margin top negativo
+      className="min-h-[110vh] md:min-h-screen flex items-center justify-center px-6 bg-gradient-to-b from-white to-white relative -mt-24 md:mt-0" // Aumentado height en móvil y más margin top negativo
     >
       {/* Patitas SVG izquierda */}
       <motion.div
