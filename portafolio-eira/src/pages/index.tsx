@@ -6,6 +6,7 @@ import Projects from '@/components/Projects';
 import PersonalBrand from '@/components/PersonalBrand';
 import Skills from '@/components/Skills';
 import Contact from '@/components/Contact';
+import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
       <PersonalBrand />
       <Skills />
       <Contact />
+      <Footer />
     </main>
   );
 }
