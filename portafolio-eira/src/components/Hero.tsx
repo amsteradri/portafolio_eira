@@ -30,7 +30,7 @@ export default function Hero() {
 
       {/* Patitas SVG derecha */}
       <motion.div
-        className="absolute -right-18 md:right-[-4rem] top-[72%] md:top-110 w-[250px] md:w-[400px] h-[500px] md:h-[800px]" // Ajustado right para móvil
+        className="absolute -right-18 md:right-[-4rem] top-[70%] md:top-110 w-[250px] md:w-[400px] h-[500px] md:h-[800px]" // Ajustado right para móvil
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1.8 }}
