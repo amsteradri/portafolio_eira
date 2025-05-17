@@ -97,7 +97,8 @@ export default function Hero() {
 
         {/* Profesión */}
         <motion.p
-          className="text-2xl md:text-[24px] text-black font-light font-poppins" // Cambiado a Poppins Light y tamaño fijo
+          className="text-2xl md:text-[24px] text-black font-[300] font-poppins"
+          style={{ fontFamily: 'Poppins, sans-serif' }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1 }}
