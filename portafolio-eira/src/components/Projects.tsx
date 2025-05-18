@@ -6,6 +6,7 @@ import studioLogo from '../../public/projects/505studio-logo.svg';
 import financetrustLogo from '../../public/projects/financetrust-logo.svg';
 import kanangaLogo from '../../public/projects/kananga-logo.svg';
 import aestheticlabLogo from '../../public/projects/aestheticlab-logo.svg';
+import splashLogo from '../../public/projects/123splash.svg';
 import PDFModal from './PDFModal';
 
 const projects = [
@@ -44,6 +45,13 @@ const projects = [
 		description: 'Creación de marca de ropa streetwear',
 		logo: aestheticlabLogo,
 		pdf: '/pdfs/aestheticlab.pdf',
+	},
+	{
+		id: 6,
+		name: '1,2,3 Splash',
+		description: 'Creación y ejecución de un evento del Club Natación Barcelona ',
+		logo: splashLogo,
+		pdf: '/pdfs/123splash.pdf',
 	},
 ];
 
