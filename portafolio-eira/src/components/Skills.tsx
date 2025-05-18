@@ -39,7 +39,7 @@ export default function Skills() {
 	return (
 		<section
 			id="skills"
-			className="min-h-screen py-20 px-8 bg-white border-t-2 border-[#56A6A6]"
+			className="min-h-screen py-20 px-8 bg-white "
 		>
 			<div className="max-w-5xl mx-auto mt-10">
 				{/* Título */}

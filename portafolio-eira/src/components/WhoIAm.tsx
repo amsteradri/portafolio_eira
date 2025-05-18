@@ -4,7 +4,7 @@ import eira from '../../public/eira.svg';
 
 export default function WhoIAm() {
   return (
-    <section id="about" className="py-12 md:py-27 px-4 md:px-8 bg-white mt-10">
+    <section id="about" className="py-12 md:py-40 px-4 md:px-8 bg-white mt-10">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-12">
         {/* Contenido del lado izquierdo */}
         <div className="flex-1 space-y-6 w-full">

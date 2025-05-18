@@ -16,7 +16,7 @@ export default function PersonalBrand() {
   ];
 
   return (
-    <section id="brand" className="min-h-screen py-12 md:py-20 px-2 md:px-8 bg-white border-t-2 border-[#56A6A6]">
+    <section id="brand" className="min-h-screen py-12 md:py-20 px-2 md:px-8 bg-white ">
       <div className="max-w-5xl mx-auto flex flex-col items-center">
         {/* Logo */}
         <motion.div 

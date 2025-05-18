@@ -33,7 +33,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="min-h-screen py-20 px-8 bg-white border-t-2 border-[#56A6A6]">
+    <section id="contact" className="min-h-screen py-20 px-8 bg-white ">
       <div className="max-w-4xl mx-auto mt-15">
         {/* Título y correo */}
         <div className="text-center mb-12">
