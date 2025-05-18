@@ -74,19 +74,7 @@ export default function Projects() {
 								/>
 							</div>
 
-							{/* Añadir enlace solo para 505 Studio */}
-							{project.name === '505 Studio' && (
-								<a
-									href="https://505-studio.vercel.app/"
-									target="_blank"
-									rel="noopener noreferrer"
-									className="absolute bottom-[40%] text-[#56A6A6] hover:text-[#3d7575] font-poppins text-md underline"
-									style={{ fontFamily: 'Poppins, sans-serif' }}
-								>
-									Visita la página web
-								</a>
-							)}
-
+							{/* Contenido del proyecto */}
 							<div className="w-full mt-8">
 								{/* Nombre del proyecto */}
 								<div className="w-full bg-[#56A6A6] text-white py-2 px-4 rounded-full text-center mb-4">
@@ -106,7 +94,7 @@ export default function Projects() {
 								</p>
 							</div>
 
-							{/* Botón para ver PDF */}
+							{/* Botones de acción */}
 							{project.pdf && (
 								<button
 									onClick={() => setSelectedPDF(project.pdf)}
@@ -115,6 +103,18 @@ export default function Projects() {
 								>
 									Ver proyecto completo
 								</button>
+							)}
+
+							{project.name === '505 Studio' && (
+								<a
+									href="https://505-studio.vercel.app/"
+									target="_blank"
+									rel="noopener noreferrer"
+									className="mt-4 text-[#56A6A6] hover:text-[#458585] font-poppins text-md underline"
+									style={{ fontFamily: 'Poppins, sans-serif' }}
+								>
+									Visita la página web
+								</a>
 							)}
 						</motion.div>
 					))}
