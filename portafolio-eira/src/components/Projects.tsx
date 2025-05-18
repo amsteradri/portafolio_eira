@@ -1,10 +1,12 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 import kataraktaLogo from '../../public/projects/katarakta.svg';
 import studioLogo from '../../public/projects/505studio-logo.svg';
 import financetrustLogo from '../../public/projects/financetrust-logo.svg';
 import kanangaLogo from '../../public/projects/kananga-logo.svg';
 import aestheticlabLogo from '../../public/projects/aestheticlab-logo.svg';
+import PDFModal from './PDFModal';
 
 const projects = [
 	{
@@ -13,6 +15,7 @@ const projects = [
 		description:
 			'Marca de botellas filtrantes inspirada en la naturaleza de los Pirineos.',
 		logo: kataraktaLogo,
+		pdf: '/pdfs/katarakta.pdf', // Añade la ruta a tu PDF
 	},
 	{
 		id: 2,
@@ -26,22 +29,27 @@ const projects = [
 		name: 'FinanceTrust',
 		description: 'Creación de marca financiera',
 		logo: financetrustLogo,
+		pdf: '/pdfs/financetrust.pdf',
 	},
 	{
 		id: 4,
 		name: 'Kananga',
 		description: 'Creación de una campaña transmedia de una PIME de safaris',
 		logo: kanangaLogo,
+		pdf: '/pdfs/kananga.pdf',
 	},
 	{
 		id: 5,
 		name: 'Aestheticlab',
 		description: 'Creación de marca de ropa streetwear',
 		logo: aestheticlabLogo,
+		pdf: '/pdfs/aestheticlab.pdf',
 	},
 ];
 
 export default function Projects() {
+	const [selectedPDF, setSelectedPDF] = useState<string | null>(null);
+
 	return (
 		// Sección principal de proyectos
 		<section id="projects" className="min-h-screen py-15 px-8 bg-white border-t-2 border-[#56A6A6]">
@@ -72,7 +80,7 @@ export default function Projects() {
 									href="https://505-studio.vercel.app/"
 									target="_blank"
 									rel="noopener noreferrer"
-									className="absolute bottom-[35%] text-[#56A6A6] hover:text-[#3d7575] font-poppins text-sm underline"
+									className="absolute bottom-[40%] text-[#56A6A6] hover:text-[#3d7575] font-poppins text-md underline"
 									style={{ fontFamily: 'Poppins, sans-serif' }}
 								>
 									Visita la página web
@@ -97,10 +105,28 @@ export default function Projects() {
 									{project.description}
 								</p>
 							</div>
+
+							{/* Botón para ver PDF */}
+							{project.pdf && (
+								<button
+									onClick={() => setSelectedPDF(project.pdf)}
+									className="mt-4 text-[#56A6A6] hover:text-[#458585] underline"
+									style={{ fontFamily: 'Poppins, sans-serif' }}
+								>
+									Ver proyecto completo
+								</button>
+							)}
 						</motion.div>
 					))}
 				</div>
 			</div>
+
+			{/* Modal del PDF */}
+			<PDFModal
+				isOpen={!!selectedPDF}
+				onClose={() => setSelectedPDF(null)}
+				pdfUrl={selectedPDF || ''}
+			/>
 		</section>
 	);
 }

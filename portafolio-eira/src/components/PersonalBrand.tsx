@@ -11,7 +11,7 @@ export default function PersonalBrand() {
 
   const secondRowTags = [
     "Geométrico",
-    "Estetico",
+    "Estético",
     "Mítico"
   ];
 
